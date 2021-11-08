@@ -31,7 +31,7 @@
 #include <cstdio>
 
 int main(int argc, char *argv[]) {
-  printf("Starting HelloMQTT demo:\n");
+  printf("Starting IBM MQTT demo:\n");
 
   TCPSocket socket;
   NetworkInterface *net = NetworkInterface::get_default_instance();
