@@ -1,0 +1,29 @@
+{
+    "config": {
+        "hostname": {
+            "help": "The demo will try to connect to this web address on port 80 (or port 443 when using tls).",
+            "value": "\"ifconfig.io\""
+        },
+        "use-tls-socket": {
+            "value": false
+        },
+        "socket-bufsize": {
+            "help": "Max socket data heap usage",
+            "value": "1024"
+        }
+    },
+    "target_overrides": {
+        "*": {
+            "target.network-default-interface-type": "WIFI",
+            "nsapi.default-wifi-security": "WPA_WPA2",
+            "nsapi.default-wifi-ssid": "\"ssid\"",
+            "nsapi.default-wifi-password": "\"password\"",
+            "esp8266.tx": "D8",
+            "esp8266.rx": "D2",
+            "esp8266.socket-bufsize": "1024",
+            "esp8266.debug": false,
+            "esp8266.provide-default" : true,
+            "mbed-mqtt.max-packet-size": "1024"
+        }
+    }
+}
