@@ -31,7 +31,7 @@
 #include <cstdio>
 
 int main(int argc, char *argv[]) {
-  printf("Starting IBM MQTT demo:\n");
+  printf("Starting ThingsBoard MQTT demo:\n");
 
   TCPSocket socket;
   NetworkInterface *net = NetworkInterface::get_default_instance();
@@ -57,8 +57,8 @@ int main(int argc, char *argv[]) {
 
   /* now we have to find where to connect */
   SocketAddress address;
-  net->gethostbyname("utrlr3.messaging.internetofthings.ibmcloud.com",
-                     &address);
+//   net->gethostbyname("test.mosquitto.org", &address);
+  address.set_ip_address("89.208.220.227");
   address.set_port(1883);
 
   /* we are connected to the network but since we're using a connection oriented
@@ -76,21 +76,19 @@ int main(int argc, char *argv[]) {
   MQTTClient client(&socket);
   MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
   data.MQTTVersion = 3;
-  data.clientID.cstring = "d:utrlr3:STM32Board:my_test_board";
-  data.username.cstring = "use-token-auth";
-  data.password.cstring = "c)-rMerJ@9Ix0Kk?0@";
+  data.clientID.cstring = "MyClientID";
+  data.username.cstring = "myusername";
+  data.password.cstring = "mypassword";
+
   if ((rc = client.connect(data)) != 0)
     printf("rc from MQTT connect is %d\r\n", rc);
-
+  
   MQTT::Message message;
-  char *topic = "iot-2/evt/statusEvent/fmt/json";
+  char *topic = "v1/devices/me/telemetry";
   char buf[100];
-  int temp = 1;
-  int press = 2;
-  int hum = 3;
+  int temp = 25;
   sprintf(buf,
-          "{\"d\":{\"ST\":\"Nucleo-IoT-mbed\",\"Temp\":%d,\"Pressure\":"
-          "%d,\"Humidity\":%d}}", temp, press, hum);
+          "{\"temperature\":%d}", temp);
   printf("Sending message: \n%s\n", buf);
   message.qos = MQTT::QOS0;
   message.retained = false;
@@ -98,7 +96,7 @@ int main(int argc, char *argv[]) {
   message.payload = (void *)buf;
   message.payloadlen = strlen(buf);
   rc = client.publish(topic, message);
-  printf("Message sent\n");
+  printf("Message sent, rc: %d\n", rc);
   printf("Demo concluded successfully \r\n");
 
   return 0;
