@@ -77,8 +77,7 @@ int main(int argc, char *argv[]) {
   MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
   data.MQTTVersion = 3;
   data.clientID.cstring = "MyClientID";
-  data.username.cstring = "myusername";
-  data.password.cstring = "mypassword";
+  data.username.cstring = "A2_TEST_TOKEN";
 
   if ((rc = client.connect(data)) != 0)
     printf("rc from MQTT connect is %d\r\n", rc);
