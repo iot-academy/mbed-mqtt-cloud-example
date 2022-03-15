@@ -10,6 +10,14 @@
         "socket-bufsize": {
             "help": "Max socket data heap usage",
             "value": "1024"
+        },
+        "tx": {
+            "help": "TX pin for serial connection",
+            "value": "UNWD_GPIO_25"
+        },
+        "rx": {
+            "help": "RX pin for serial connection",
+            "value": "UNWD_GPIO_26"
         }
     },
     "target_overrides": {
@@ -18,8 +26,10 @@
             "nsapi.default-wifi-security": "WPA_WPA2",
             "nsapi.default-wifi-ssid": "\"ssid\"",
             "nsapi.default-wifi-password": "\"password\"",
-            "esp8266.tx": "D8",
-            "esp8266.rx": "D2",
+            "platform.stdio-baud-rate": 115200,
+            "platform.default-serial-baud-rate": 115200,
+            "esp8266.tx": "UNWD_GPIO_25",
+            "esp8266.rx": "UNWD_GPIO_26",
             "esp8266.socket-bufsize": "1024",
             "esp8266.debug": false,
             "esp8266.provide-default" : true,

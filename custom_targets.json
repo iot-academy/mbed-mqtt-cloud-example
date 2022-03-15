@@ -1,0 +1,28 @@
+{
+    "UNWIRED_RANGE": {
+        "inherits": [
+            "MCU_STM32L151xC"
+        ],
+        "default_toolchain": "ARM",
+        "extra_labels_add": [
+            "STM32L151CC"
+        ],
+        "config": {
+            "hse_value": {
+                "value": "24000000",
+                "macro_name": "HSE_VALUE"
+            }
+        },
+        "supported_toolchains": ["ARM", "GCC_ARM", "IAR"],
+        "device_has_add": [
+            "ANALOGOUT",
+            "SERIAL_ASYNCH",
+            "FLASH",
+            "MPU"
+        ],
+        "device_has_remove": [
+            "SERIAL_FC"
+        ],
+        "device_name": "STM32L151CCTx"
+    }
+}
