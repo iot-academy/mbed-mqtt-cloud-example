@@ -5,6 +5,7 @@
 
 #define MQTT_BROKER "thingsboard.myitacademy.ru"
 #define MQTT_TOPIC  "v1/devices/me/telemetry"
+#define MQTT_PORT   1883
 #define SIG_NEED_PUBLISH    0x01
 
 DigitalOut led(LED1);
@@ -61,7 +62,7 @@ void mqtt_thread_io()
             /* now we have to find where to connect */
             SocketAddress address;
             net->gethostbyname(MQTT_BROKER, &address);
-            address.set_port(1883);
+            address.set_port(MQTT_PORT);
 
             /* we are connected to the network but since we're using a connection oriented
             * protocol we still need to open a connection on the socket */
@@ -89,7 +90,7 @@ void mqtt_thread_io()
             char buf[100];
             int temp = (int)sensor_bme.getTemperature();
             sprintf(buf, "{\"temperature\": %d}", temp);
-            printf("Sending message: \n%s\n", buf);
+            printf("Message sent. Temperature = %d\n", temp);
             message.qos = MQTT::QOS1;
             message.retained = false;
             message.dup = false;
