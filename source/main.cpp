@@ -57,8 +57,7 @@ int main(int argc, char *argv[]) {
 
   /* now we have to find where to connect */
   SocketAddress address;
-//   net->gethostbyname("test.mosquitto.org", &address);
-  address.set_ip_address("89.208.220.227");
+  net->gethostbyname("thingsboard.myitacademy.ru", &address);
   address.set_port(1883);
 
   /* we are connected to the network but since we're using a connection oriented
